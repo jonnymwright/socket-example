@@ -2,12 +2,25 @@
 <html>
   <head>
     <title>Socket.IO chat</title>
-    <link rel="stylesheet" href="index.css" />
+    <link rel="stylesheet" type="text/css" href="index.css" />
   </head>
   <script src="/socket.io/socket.io.js"></script>
+  <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
   <script>
     var socket = io();
   </script>
+  <script>
+  $(function () {
+    var socket = io();
+    $('form').submit(function(e){
+      console.log('Sending the message: ' + $('#m').val());
+      socket.emit('chat message', $('#m').val());
+      $('#m').val('');
+      console.log('Finished sending');
+      return false;
+    });
+  });
+</script>
   <body>
     <ul id="messages"></ul>
     <form action="">
